@@ -335,18 +335,18 @@
 			"notests": true
 		},
 		{
-			"importpath": "github.com/gosuri/uilive",
-			"repository": "https://github.com/gosuri/uilive",
-			"vcs": "git",
-			"revision": "efb88ccd059957c48f24f9d351d33a0eb00ede41",
-			"branch": "master",
-			"notests": true
-		},
-		{
 			"importpath": "github.com/gorilla/websocket",
 			"repository": "https://github.com/gorilla/websocket",
 			"vcs": "git",
 			"revision": "5df680c89f2a84ad9cb16cf143557a0853cfaabc",
+			"branch": "master",
+			"notests": true
+		},
+		{
+			"importpath": "github.com/gosuri/uilive",
+			"repository": "https://github.com/gosuri/uilive",
+			"vcs": "git",
+			"revision": "efb88ccd059957c48f24f9d351d33a0eb00ede41",
 			"branch": "master",
 			"notests": true
 		},
@@ -495,6 +495,94 @@
 			"repository": "https://github.com/mitchellh/mapstructure",
 			"vcs": "git",
 			"revision": "21a35fb16463dfb7c8eee579c65d995d95e64d1e",
+			"branch": "master",
+			"notests": true
+		},
+		{
+			"importpath": "github.com/nats-io/gnatsd/auth",
+			"repository": "https://github.com/nats-io/gnatsd",
+			"vcs": "git",
+			"revision": "8ffdb6b7f6c6eb73e0253cdd9f53eeb959c6d861",
+			"branch": "master",
+			"path": "auth",
+			"notests": true
+		},
+		{
+			"importpath": "github.com/nats-io/gnatsd/conf",
+			"repository": "https://github.com/nats-io/gnatsd",
+			"vcs": "git",
+			"revision": "8ffdb6b7f6c6eb73e0253cdd9f53eeb959c6d861",
+			"branch": "master",
+			"path": "conf",
+			"notests": true
+		},
+		{
+			"importpath": "github.com/nats-io/gnatsd/server",
+			"repository": "https://github.com/nats-io/gnatsd",
+			"vcs": "git",
+			"revision": "8ffdb6b7f6c6eb73e0253cdd9f53eeb959c6d861",
+			"branch": "master",
+			"path": "/server",
+			"notests": true
+		},
+		{
+			"importpath": "github.com/nats-io/gnatsd/test",
+			"repository": "https://github.com/nats-io/gnatsd",
+			"vcs": "git",
+			"revision": "8ffdb6b7f6c6eb73e0253cdd9f53eeb959c6d861",
+			"branch": "master",
+			"path": "test",
+			"notests": true
+		},
+		{
+			"importpath": "github.com/nats-io/gnatsd/util",
+			"repository": "https://github.com/nats-io/gnatsd",
+			"vcs": "git",
+			"revision": "8ffdb6b7f6c6eb73e0253cdd9f53eeb959c6d861",
+			"branch": "master",
+			"path": "util",
+			"notests": true
+		},
+		{
+			"importpath": "github.com/nats-io/gnatsd/vendor/github.com/nats-io/nuid",
+			"repository": "https://github.com/nats-io/gnatsd",
+			"vcs": "git",
+			"revision": "8ffdb6b7f6c6eb73e0253cdd9f53eeb959c6d861",
+			"branch": "master",
+			"path": "vendor/github.com/nats-io/nuid",
+			"notests": true
+		},
+		{
+			"importpath": "github.com/nats-io/gnatsd/vendor/golang.org/x/crypto/bcrypt",
+			"repository": "https://github.com/nats-io/gnatsd",
+			"vcs": "git",
+			"revision": "8ffdb6b7f6c6eb73e0253cdd9f53eeb959c6d861",
+			"branch": "master",
+			"path": "vendor/golang.org/x/crypto/bcrypt",
+			"notests": true
+		},
+		{
+			"importpath": "github.com/nats-io/gnatsd/vendor/golang.org/x/crypto/blowfish",
+			"repository": "https://github.com/nats-io/gnatsd",
+			"vcs": "git",
+			"revision": "8ffdb6b7f6c6eb73e0253cdd9f53eeb959c6d861",
+			"branch": "master",
+			"path": "vendor/golang.org/x/crypto/blowfish",
+			"notests": true
+		},
+		{
+			"importpath": "github.com/nats-io/nats",
+			"repository": "https://github.com/nats-io/nats",
+			"vcs": "git",
+			"revision": "61923ed1eaf8398000991fbbee2ef11ab5a5be0d",
+			"branch": "master",
+			"notests": true
+		},
+		{
+			"importpath": "github.com/nats-io/nuid",
+			"repository": "https://github.com/nats-io/nuid",
+			"vcs": "git",
+			"revision": "289cccf02c178dc782430d534e3c1f5b72af807f",
 			"branch": "master",
 			"notests": true
 		},
@@ -693,6 +781,15 @@
 			"revision": "7a1054f3ac58191481dc500077c6b060f5d6c7e5",
 			"branch": "master",
 			"path": "/openpgp",
+			"notests": true
+		},
+		{
+			"importpath": "golang.org/x/crypto/ssh/terminal",
+			"repository": "https://go.googlesource.com/crypto",
+			"vcs": "git",
+			"revision": "ca7e7f10cb9fd9c1a6ff7f60436c086d73714180",
+			"branch": "master",
+			"path": "/ssh/terminal",
 			"notests": true
 		},
 		{

@@ -141,9 +141,11 @@ func main() {
 				logger.Log("component", "message bus", "err", err)
 				os.Exit(1)
 			}
+			logger.Log("component", "message bus", "type", "NATS")
 			connecter = bus
 		} else {
 			connecter = platform.NewStandaloneMessageBus()
+			logger.Log("component", "message bus", "type", "standalone")
 		}
 	}
 

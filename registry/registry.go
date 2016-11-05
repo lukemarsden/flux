@@ -75,7 +75,7 @@ func (c *Client) GetRepository(repository string) ([]flux.ImageDescription, erro
 	}
 
 	hostlessImageName := fmt.Sprintf("%s/%s", org, image)
-	httphost := "https://" + host
+	httphost := "http://" + host
 
 	// quay.io wants us to use cookies for authorisation, so we have
 	// to construct one (the default client has none). This means a

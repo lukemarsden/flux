@@ -70,6 +70,7 @@ func (c *Cluster) kubectlCommand(args ...string) *exec.Cmd {
 func (c *Cluster) doReleaseCommand(logger log.Logger, newDefinition *apiObject, args ...string) error {
 	cmd := c.kubectlCommand(args...)
 	cmd.Stdin = bytes.NewReader(newDefinition.bytes)
+	logger.Log("cmd", "INPUT: "+string(newDefinition.bytes))
 	logger.Log("cmd", strings.Join(cmd.Args, " "))
 
 	begin := time.Now()

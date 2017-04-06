@@ -9,7 +9,7 @@ import (
 )
 
 type Swarm struct {
-	client
+	client *client.Client
 	logger log.Logger
 }
 
@@ -29,13 +29,13 @@ func NewSwarm(logger log.Logger) (*Swarm, error) {
 }
 
 func (c *Swarm) Apply(defs []platform.ServiceDefinition) error {
-
+	return nil
 }
 
 func (c *Swarm) Ping() error {
-
+	return nil
 }
 
 func (c *Swarm) Version() (string, error) {
-	return c.Version
+	return "test", nil
 }

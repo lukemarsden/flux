@@ -50,6 +50,7 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 }
 
 func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err error) {
+	namespace := "default_swarm"
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	args := filters.NewArgs()
@@ -69,9 +70,6 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 			Metadata:   v.Spec.Annotations.Labels,
 			Status:     string(v.UpdateStatus.State),
 			Containers: platform.ContainersOrExcuse{},
-		}
-		if ignore.Contains(ps.ID) {
-			continue
 		}
 		args := filters.NewArgs()
 		args.Add("label", fmt.Sprintf("com.docker.swarm.service.name=%v", v.Spec.Annotations.Name))

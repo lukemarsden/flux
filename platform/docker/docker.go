@@ -5,7 +5,6 @@ import (
 
 	"github.com/docker/docker/client"
 
-	"github.com/weaveworks/flux"
 	"github.com/weaveworks/flux/platform"
 )
 
@@ -27,14 +26,6 @@ func NewSwarm(logger log.Logger) (*Swarm, error) {
 	}
 
 	return c, nil
-}
-
-func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platform.Service, error) {
-
-}
-
-func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err error) {
-
 }
 
 func (c *Swarm) Apply(defs []platform.ServiceDefinition) error {

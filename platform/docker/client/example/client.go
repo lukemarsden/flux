@@ -2,13 +2,16 @@ package main
 
 import (
 	"context"
-	"io"
+	"fmt"
 	"log"
-	"os"
 	"time"
 
+	"github.com/ContainerSolutions/flux/platform"
+	"github.com/davecgh/go-spew/spew"
 	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/client"
+	"github.com/weaveworks/flux"
 )
 
 func main() {
@@ -16,13 +19,36 @@ func main() {
 	defer cancel()
 
 	cl, _ := client.NewEnvClient()
-	reader, err := cl.ContainerLogs(ctx, "5c4c581c8dad", types.ContainerLogsOptions{ShowStdout: true})
+	s, err := cl.ServiceList(ctx, types.ServiceListOptions{})
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	_, err = io.Copy(os.Stdout, reader)
-	if err != nil && err != io.EOF {
-		log.Fatal(err)
+	pss := make([]platform.Service, len(s))
+	for k, v := range s {
+		args := filters.NewArgs()
+		args.Add("label", fmt.Sprintf("com.docker.swarm.service.name=%v", v.Spec.Annotations.Name))
+		cs, err := cl.ContainerList(ctx, types.ContainerListOptions{Filters: args})
+		spew.Dump(cs)
+		if err != nil {
+			log.Fatal(err)
+		}
+		ps := platform.Service{
+			ID:         flux.MakeServiceID("default-swarm", v.Spec.Annotations.Name),
+			IP:         "?",
+			Metadata:   v.Spec.Annotations.Labels,
+			Status:     string(v.UpdateStatus.State),
+			Containers: platform.ContainersOrExcuse{},
+		}
+		pcs := make([]platform.Container, len(cs))
+		for k, v := range cs {
+			pcs[k] = platform.Container{
+				Name:  v.Names[0],
+				Image: v.Image,
+			}
+		}
+		ps.Containers.Containers = pcs
+		pss[k] = ps
 	}
+	spew.Dump(pss)
 }

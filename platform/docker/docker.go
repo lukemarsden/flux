@@ -1,34 +1,35 @@
 package docker
 
 import (
-    "github.com/docker/docker/api/types"
-    "github.com/docker/docker/client"
+	"log"
 
-    "github.com/weaveworks/flux"
-    "github.com/weaveworks/flux/platform"
+	"github.com/docker/docker/client"
+
+	"github.com/weaveworks/flux"
+	"github.com/weaveworks/flux/platform"
 )
 
 type Swarm struct {
-    client 
-    logger log.Logger
+	client
+	logger log.Logger
 }
 
 func NewSwarm(logger log.Logger) (*Swarm, error) {
-    cli, err := client.NewEnvClient()
+	cli, err := client.NewEnvClient()
 
-    if err != nil {
-        panic(err)
-    }
+	if err != nil {
+		panic(err)
+	}
 
-    c := &Swarm{
-        client: cli,
-        logger: logger
-    }
+	c := &Swarm{
+		client: cli,
+		logger: logger,
+	}
 
-    return c, nil
+	return c, nil
 }
 
-func(c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]Service, error) {
+func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platform.Service, error) {
 
 }
 
@@ -45,5 +46,5 @@ func (c *Swarm) Ping() error {
 }
 
 func (c *Swarm) Version() (string, error) {
-    return c.Version
+	return c.Version
 }

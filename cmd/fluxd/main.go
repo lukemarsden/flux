@@ -18,6 +18,7 @@ import (
 	transport "github.com/weaveworks/flux/http"
 	"github.com/weaveworks/flux/platform"
 	"github.com/weaveworks/flux/platform/kubernetes"
+        "github.com/weaveworks/flux/platform/docker"
 )
 
 var version string
@@ -104,6 +105,13 @@ func main() {
 		k8s = cluster
 	}
 
+        var docker platform.Platform
+        {
+            logger := log.NewContext(logger).With("component", "platform")
+            swarm := docker.NewSwarm(logger)
+            docker = swarm
+        }
+
 	// Connect to fluxsvc
 	daemonLogger := log.NewContext(logger).With("component", "client")
 	daemon, err := transport.NewDaemon(
@@ -112,7 +120,7 @@ func main() {
 		flux.Token(*token),
 		transport.NewRouter(),
 		*fluxsvcAddress,
-		k8s,
+		docker,
 		daemonLogger,
 	)
 	if err != nil {

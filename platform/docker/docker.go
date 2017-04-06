@@ -1,11 +1,17 @@
 package docker
 
 import (
-	"log"
+	"fmt"
 
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/client"
+	"github.com/go-kit/kit/log"
 
+	"github.com/weaveworks/flux"
 	"github.com/weaveworks/flux/platform"
+
+	"golang.org/x/net/context"
 )
 
 type Swarm struct {
@@ -36,6 +42,16 @@ func (c *Swarm) Ping() error {
 	return nil
 }
 
+func (c *Swarm) Sync(platform.SyncDef) error {
+	return nil
+}
+
+func (c *Swarm) Export() ([]byte, error) {
+	return nil, nil
+}
+
 func (c *Swarm) Version() (string, error) {
-	return "test", nil
+	ctx := context.Background()
+	version, err := c.client.ServerVersion(ctx)
+	return version.Version, err
 }

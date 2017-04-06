@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  fluxsvc:
+    image: weaveworks/fluxsvc
+    hostname: fluxsvc
+    restart: always
+    command: fluxsvc --database-source=file://flux.db --registry-cache-expiry=20m
+    ports:
+      - 3030:3030
+  fluxd:
+    image: weaveworks/fluxd
+    hostname: fluxd
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - fluxsvc
+    links:
+      - fluxsvc
+    ports:
+      - 3031:3031
+    command: fluxd --fluxsvc-address=ws://fluxsvc:3030/api/flux

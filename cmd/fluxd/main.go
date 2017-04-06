@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"os/exec"
+        //"os/exec"
 	"os/signal"
 	"syscall"
 	"time"
@@ -12,12 +12,12 @@ import (
 	"github.com/go-kit/kit/log"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/spf13/pflag"
-	"k8s.io/client-go/1.5/rest"
+	//"k8s.io/client-go/1.5/rest"
 
 	"github.com/weaveworks/flux"
 	transport "github.com/weaveworks/flux/http"
 	"github.com/weaveworks/flux/platform"
-	"github.com/weaveworks/flux/platform/kubernetes"
+	//"github.com/weaveworks/flux/platform/kubernetes"
         "github.com/weaveworks/flux/platform/docker"
 )
 
@@ -38,7 +38,7 @@ func main() {
 		listenAddr        = fs.StringP("listen", "l", ":3031", "Listen address where /metrics will be served")
 		fluxsvcAddress    = fs.String("fluxsvc-address", "wss://cloud.weave.works/api/flux", "Address of the fluxsvc to connect to.")
 		token             = fs.String("token", "", "Token to use to authenticate with flux service")
-		kubernetesKubectl = fs.String("kubernetes-kubectl", "", "Optional, explicit path to kubectl tool")
+		//kubernetesKubectl = fs.String("kubernetes-kubectl", "", "Optional, explicit path to kubectl tool")
 		versionFlag       = fs.Bool("version", false, "Get version number")
 	)
 	fs.Parse(os.Args)
@@ -60,6 +60,7 @@ func main() {
 	}
 
 	// Platform component.
+        /*
 	var k8s platform.Platform
 	{
 		restClientConfig, err := rest.InClusterConfig()
@@ -90,7 +91,7 @@ func main() {
 		logger.Log("kubectl", kubectl)
 
 		kubectlApplier := kubernetes.NewKubectl(kubectl, restClientConfig)
-		cluster, err := kubernetes.NewCluster(restClientConfig, kubectlApplier, version, logger)
+		cluster, _ := kubernetes.NewCluster(restClientConfig, kubectlApplier, version, logger)
 		if err != nil {
 			logger.Log("err", err)
 			os.Exit(1)
@@ -104,12 +105,13 @@ func main() {
 
 		k8s = cluster
 	}
+        */
 
-        var docker platform.Platform
+        var doc platform.Platform
         {
             logger := log.NewContext(logger).With("component", "platform")
-            swarm := docker.NewSwarm(logger)
-            docker = swarm
+            swarm, _ := docker.NewSwarm(logger)
+            doc = swarm
         }
 
 	// Connect to fluxsvc
@@ -120,7 +122,7 @@ func main() {
 		flux.Token(*token),
 		transport.NewRouter(),
 		*fluxsvcAddress,
-		docker,
+		doc,
 		daemonLogger,
 	)
 	if err != nil {

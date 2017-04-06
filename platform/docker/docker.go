@@ -1,14 +1,9 @@
 package docker
 
 import (
-	"fmt"
-
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/client"
 	"github.com/go-kit/kit/log"
 
-	"github.com/weaveworks/flux"
 	"github.com/weaveworks/flux/platform"
 
 	"golang.org/x/net/context"

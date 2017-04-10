@@ -7,9 +7,9 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/ContainerSolutions/flux/platform/docker"
 	"github.com/weaveworks/flux"
 	"github.com/weaveworks/flux/instance"
-	"github.com/weaveworks/flux/platform/kubernetes"
 )
 
 type ReleaseContext struct {
@@ -163,7 +163,7 @@ func (rc *ReleaseContext) SelectServices(included []flux.ServiceID, locked flux.
 }
 
 func (rc *ReleaseContext) FindDefinedServices() ([]*ServiceUpdate, error) {
-	services, err := kubernetes.FindDefinedServices(rc.RepoPath())
+	services, err := docker.FindDefinedServices(rc.RepoPath())
 	if err != nil {
 		return nil, err
 	}

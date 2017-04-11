@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 type MockPlatform struct {

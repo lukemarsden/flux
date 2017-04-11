@@ -9,12 +9,12 @@ import (
 	"github.com/go-kit/kit/log"
 	"github.com/pkg/errors"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/git"
-	"github.com/weaveworks/flux/instance"
-	"github.com/weaveworks/flux/jobs"
-	"github.com/weaveworks/flux/platform"
-	"github.com/weaveworks/flux/registry"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/git"
+	"github.com/ContainerSolutions/flux/instance"
+	"github.com/ContainerSolutions/flux/jobs"
+	"github.com/ContainerSolutions/flux/platform"
+	"github.com/ContainerSolutions/flux/registry"
 )
 
 const (

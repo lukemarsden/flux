@@ -8,12 +8,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/history"
-	"github.com/weaveworks/flux/instance"
-	"github.com/weaveworks/flux/jobs"
-	"github.com/weaveworks/flux/platform"
-	"github.com/weaveworks/flux/registry"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/history"
+	"github.com/ContainerSolutions/flux/instance"
+	"github.com/ContainerSolutions/flux/jobs"
+	"github.com/ContainerSolutions/flux/platform"
+	"github.com/ContainerSolutions/flux/registry"
 
 	"github.com/go-kit/kit/log"
 )

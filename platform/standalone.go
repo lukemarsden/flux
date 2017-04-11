@@ -4,7 +4,7 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 var (

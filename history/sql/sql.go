@@ -3,7 +3,7 @@ package sql
 import (
 	"github.com/jmoiron/sqlx"
 
-	"github.com/weaveworks/flux/history"
+	"github.com/ContainerSolutions/flux/history"
 )
 
 // A history DB that uses a SQL database

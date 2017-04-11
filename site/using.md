@@ -104,7 +104,7 @@ alongside a list of other versions and their timestamps.
 
 In order to use Flux, we need a service that we can deploy.
 
-Fork the [flux-example](https://github.com/weaveworks/flux-example)
+Fork the [flux-example](https://github.com/ContainerSolutions/flux-example)
 repository to your own account on github.
 
 You can run the helloworld service by creating the deployment and
@@ -214,7 +214,7 @@ Each Kubernetes component should have its own file.
 Files may be separated into subfolders.
 
 A simple example can be 
-[found here](https://github.com/weaveworks/flux-example). A slightly
+[found here](https://github.com/ContainerSolutions/flux-example). A slightly
 more complex example can be found in the 
 [Microservices Demo](https://github.com/microservices-demo/microservices-demo/tree/master/deploy/kubernetes/manifests)
 reference architecture.

@@ -1,7 +1,7 @@
 package history
 
 import (
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 type mock struct{}

@@ -1,7 +1,7 @@
 package registry
 
 import (
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 type Repository struct {

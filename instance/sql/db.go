@@ -8,8 +8,8 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/pkg/errors"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/instance"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/instance"
 )
 
 type DB struct {

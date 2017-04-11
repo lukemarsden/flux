@@ -1,8 +1,8 @@
 package instance
 
 import (
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/history"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/history"
 )
 
 type EventReadWriter struct {

@@ -5,7 +5,7 @@ menu_order: 80
 
 # Build
 
-Ensure the repository is checked out into $GOPATH/src/github.com/weaveworks/flux.
+Ensure the repository is checked out into $GOPATH/src/github.com/ContainerSolutions/flux.
 Then, from the root,
 
 ```

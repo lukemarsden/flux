@@ -3,7 +3,7 @@ package registry
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 	"strings"
 )
 

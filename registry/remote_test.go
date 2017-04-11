@@ -7,7 +7,7 @@ import (
 	"github.com/docker/distribution/manifest/schema1"
 	"github.com/pkg/errors"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 const testTagStr = "tag"

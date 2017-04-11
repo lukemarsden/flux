@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 // Just tests that the mock does its job.

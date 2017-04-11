@@ -9,8 +9,8 @@ import (
 
 	"github.com/nats-io/nats"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/platform"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/platform"
 )
 
 var testNATS = flag.String("nats-url", "", "NATS connection URL; use NATS' default if empty")

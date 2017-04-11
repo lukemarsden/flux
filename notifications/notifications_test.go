@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/instance"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/instance"
 )
 
 // Generate an example release

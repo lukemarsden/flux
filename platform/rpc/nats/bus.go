@@ -8,10 +8,10 @@ import (
 
 	"github.com/nats-io/nats"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/guid"
-	"github.com/weaveworks/flux/platform"
-	fluxrpc "github.com/weaveworks/flux/platform/rpc"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/guid"
+	"github.com/ContainerSolutions/flux/platform"
+	fluxrpc "github.com/ContainerSolutions/flux/platform/rpc"
 )
 
 const (

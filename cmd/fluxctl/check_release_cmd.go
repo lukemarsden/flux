@@ -13,10 +13,10 @@ import (
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/http/httperror"
-	"github.com/weaveworks/flux/jobs"
-	"github.com/weaveworks/flux/release"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/http/httperror"
+	"github.com/ContainerSolutions/flux/jobs"
+	"github.com/ContainerSolutions/flux/release"
 )
 
 const largestHeartbeatDelta = 5 * time.Second

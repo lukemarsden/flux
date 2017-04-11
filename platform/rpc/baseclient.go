@@ -3,8 +3,8 @@ package rpc
 import (
 	"github.com/pkg/errors"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/platform"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/platform"
 )
 
 type baseClient struct{}

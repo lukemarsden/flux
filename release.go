@@ -4,7 +4,7 @@ import (
 	"sort"
 	"time"
 
-	"github.com/weaveworks/flux/guid"
+	"github.com/ContainerSolutions/flux/guid"
 )
 
 // ReleaseKind says whether a release is to be planned only, or planned then executed

@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/weaveworks/flux/platform"
+	"github.com/ContainerSolutions/flux/platform"
 )
 
 func pipes() (io.ReadWriteCloser, io.ReadWriteCloser) {

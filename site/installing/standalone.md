@@ -26,7 +26,7 @@ within the [standalone deploy directory](../../deploy/standalone/).
 
 ### Install the fluxctl client
 
-Download the latest version of the [fluxctl client from github](https://github.com/weaveworks/flux/releases/latest).
+Download the latest version of the [fluxctl client from github](https://github.com/ContainerSolutions/flux/releases/latest).
 
 ---
 

@@ -4,11 +4,11 @@ import (
 	"errors"
 
 	"github.com/go-kit/kit/log"
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/git"
-	"github.com/weaveworks/flux/history"
-	"github.com/weaveworks/flux/platform"
-	"github.com/weaveworks/flux/registry"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/git"
+	"github.com/ContainerSolutions/flux/history"
+	"github.com/ContainerSolutions/flux/platform"
+	"github.com/ContainerSolutions/flux/registry"
 )
 
 // StandaloneInstancer is the instancer for standalone mode

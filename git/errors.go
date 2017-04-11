@@ -3,7 +3,7 @@ package git
 import (
 	"errors"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 var NoRepoError = flux.UserConfigProblem{&flux.BaseError{
@@ -14,7 +14,7 @@ We need to clone a git repo to proceed, and you haven't supplied
 one. Please upload a config file, including a git repository URL, as
 described in
 
-    https://github.com/weaveworks/flux/blob/master/site/using.md
+    https://github.com/ContainerSolutions/flux/blob/master/site/using.md
 
 `,
 }}

@@ -17,7 +17,7 @@ More informative and helpful UI.
 -   Filter out Kubernetes add-ons from consideration
 -   More consistent Prometheus metric labeling
 
-See also https://github.com/weaveworks/flux/issues?&q=closed%3A"2017-01-27 .. 2017-03-15"
+See also https://github.com/ContainerSolutions/flux/issues?&q=closed%3A"2017-01-27 .. 2017-03-15"
 
 ## 0.1.0 (2017-01-27)
 
@@ -34,5 +34,5 @@ Initial semver release.
 -   Added new release process
 -   Refactored registry code and improved coverage
 
-See https://github.com/weaveworks/flux/milestone/7?closed=1 for full details.
+See https://github.com/ContainerSolutions/flux/milestone/7?closed=1 for full details.
 

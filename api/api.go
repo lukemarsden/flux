@@ -1,9 +1,9 @@
 package api
 
 import (
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/jobs"
-	"github.com/weaveworks/flux/platform"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/jobs"
+	"github.com/ContainerSolutions/flux/platform"
 )
 
 type ClientService interface {

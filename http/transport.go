@@ -10,8 +10,8 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/pkg/errors"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/jobs"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/jobs"
 )
 
 func NewRouter() *mux.Router {

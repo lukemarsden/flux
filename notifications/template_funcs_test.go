@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 func TestTemplateFunc_Last(t *testing.T) {

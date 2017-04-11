@@ -8,7 +8,7 @@ This process will create a new tagged release of flux, push dockerfiles and uplo
 ## Release process
 
 1. Alter and commit the /CHANGELOG.md file to signify what has changed in this version.
-2. Create a new release: https://github.com/weaveworks/flux/releases/new
+2. Create a new release: https://github.com/ContainerSolutions/flux/releases/new
 4. Fill in the version number for the name and tag. The version number should be semantic in the form `v1.2.3`.
 5. Fill in the Description field (possibly a copy paste from the CHANGELOG.md)
 6. Click "Publish release"
@@ -17,4 +17,4 @@ Circle will then run the build and upload the built binaries to the "Downloads" 
 
 ## Outputs
 
-The most recent binaries are always available at: https://github.com/weaveworks/flux/releases/latest
+The most recent binaries are always available at: https://github.com/ContainerSolutions/flux/releases/latest

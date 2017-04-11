@@ -5,7 +5,7 @@ import (
 	"io"
 	"net/rpc"
 
-	"github.com/weaveworks/flux/platform"
+	"github.com/ContainerSolutions/flux/platform"
 )
 
 // RPCClient is the rpc-backed implementation of a platform, for

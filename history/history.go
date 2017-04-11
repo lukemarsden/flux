@@ -3,7 +3,7 @@ package history
 import (
 	"io"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 type EventReadWriter interface {

@@ -6,8 +6,8 @@ import (
 	"net/rpc"
 	"net/rpc/jsonrpc"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/platform"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/platform"
 )
 
 // RPCClientV4 is the rpc-backed implementation of a platform, for

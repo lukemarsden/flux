@@ -8,7 +8,7 @@ import (
 
 	"github.com/go-kit/kit/log"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 // Note: This actually goes off to docker hub to find the Image.

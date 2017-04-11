@@ -10,10 +10,10 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/pkg/errors"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/api"
-	transport "github.com/weaveworks/flux/http"
-	"github.com/weaveworks/flux/jobs"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/api"
+	transport "github.com/ContainerSolutions/flux/http"
+	"github.com/ContainerSolutions/flux/jobs"
 )
 
 type client struct {

@@ -9,7 +9,7 @@ import (
 	"os"
 	"os/exec"
 
-	"github.com/weaveworks/flux/platform"
+	"github.com/ContainerSolutions/flux/platform"
 
 	"golang.org/x/net/context"
 )

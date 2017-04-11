@@ -8,8 +8,8 @@ import (
 	"strings"
 
 	"github.com/ContainerSolutions/flux/platform/docker"
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/instance"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/instance"
 )
 
 type ReleaseContext struct {

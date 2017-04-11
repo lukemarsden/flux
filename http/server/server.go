@@ -17,15 +17,15 @@ import (
 	"github.com/pkg/errors"
 	"github.com/weaveworks/common/middleware"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/api"
-	transport "github.com/weaveworks/flux/http"
-	"github.com/weaveworks/flux/http/httperror"
-	"github.com/weaveworks/flux/http/websocket"
-	"github.com/weaveworks/flux/integrations/github"
-	"github.com/weaveworks/flux/jobs"
-	"github.com/weaveworks/flux/platform"
-	"github.com/weaveworks/flux/platform/rpc"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/api"
+	transport "github.com/ContainerSolutions/flux/http"
+	"github.com/ContainerSolutions/flux/http/httperror"
+	"github.com/ContainerSolutions/flux/http/websocket"
+	"github.com/ContainerSolutions/flux/integrations/github"
+	"github.com/ContainerSolutions/flux/jobs"
+	"github.com/ContainerSolutions/flux/platform"
+	"github.com/ContainerSolutions/flux/platform/rpc"
 )
 
 func NewHandler(s api.FluxService, r *mux.Router, logger log.Logger) http.Handler {

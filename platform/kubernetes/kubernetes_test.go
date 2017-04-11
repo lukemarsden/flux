@@ -11,7 +11,7 @@ import (
 	"github.com/go-kit/kit/log"
 	"k8s.io/client-go/1.5/rest"
 
-	"github.com/weaveworks/flux/platform"
+	"github.com/ContainerSolutions/flux/platform"
 )
 
 type command struct {

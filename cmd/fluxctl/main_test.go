@@ -2,14 +2,14 @@
 package main
 
 import (
-	transport "github.com/weaveworks/flux/http"
+	transport "github.com/ContainerSolutions/flux/http"
 	"net/http"
 
 	"bytes"
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
-	"github.com/weaveworks/flux/http/client"
+	"github.com/ContainerSolutions/flux/http/client"
 	"io/ioutil"
 	"net/url"
 	"strings"

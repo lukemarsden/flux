@@ -3,7 +3,7 @@ package http
 import (
 	"errors"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 var ErrorDeprecated = &flux.BaseError{
@@ -11,11 +11,11 @@ var ErrorDeprecated = &flux.BaseError{
 
 This indicates your client (fluxctl) needs to be updated: please see
 
-    https://github.com/weaveworks/flux/releases
+    https://github.com/ContainerSolutions/flux/releases
 
 If you still have this problem after upgrading, please file an issue at
 
-    https://github.com/weaveworks/flux/issues
+    https://github.com/ContainerSolutions/flux/issues
 
 mentioning what you were attempting to do, and the output of
 
@@ -43,13 +43,13 @@ func MakeAPINotFound(path string) *flux.BaseError {
 This indicates that your client (probably fluxctl) is either out of
 date, or faulty. Please see
 
-    https://github.com/weaveworks/flux/releases
+    https://github.com/ContainerSolutions/flux/releases
 
 for releases of fluxctl.
 
 If you still have problems, please file an issue at
 
-    https://github.com/weaveworks/flux/issues
+    https://github.com/ContainerSolutions/flux/issues
 
 mentioning what you were attempting to do, and the output of
 

@@ -1,9 +1,9 @@
 package release
 
 import (
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/instance"
-	"github.com/weaveworks/flux/platform"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/instance"
+	"github.com/ContainerSolutions/flux/platform"
 )
 
 // Operations on instances (or instance.* types) that we need for

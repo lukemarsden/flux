@@ -11,10 +11,10 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/api"
-	transport "github.com/weaveworks/flux/http"
-	"github.com/weaveworks/flux/http/client"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/api"
+	transport "github.com/ContainerSolutions/flux/http"
+	"github.com/ContainerSolutions/flux/http/client"
 )
 
 type rootOpts struct {

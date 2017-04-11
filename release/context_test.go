@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/weaveworks/flux/git"
-	"github.com/weaveworks/flux/instance"
-	"github.com/weaveworks/flux/platform/kubernetes/testdata"
+	"github.com/ContainerSolutions/flux/git"
+	"github.com/ContainerSolutions/flux/instance"
+	"github.com/ContainerSolutions/flux/platform/kubernetes/testdata"
 )
 
 func TestCloneCommitAndPush(t *testing.T) {

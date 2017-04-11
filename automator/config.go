@@ -6,8 +6,8 @@ import (
 
 	"github.com/go-kit/kit/log"
 
-	"github.com/weaveworks/flux/instance"
-	"github.com/weaveworks/flux/jobs"
+	"github.com/ContainerSolutions/flux/instance"
+	"github.com/ContainerSolutions/flux/jobs"
 )
 
 // Config collects the parameters to the automator. All fields are mandatory.

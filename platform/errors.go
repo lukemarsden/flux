@@ -1,7 +1,7 @@
 package platform
 
 import (
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 func UnavailableError(err error) error {
@@ -23,11 +23,11 @@ and try the operation again.
 If you are not sure if fluxd is running, please consult the
 installation instructions in our documentation:
 
-    https://github.com/weaveworks/flux/blob/master/site/installing.md
+    https://github.com/ContainerSolutions/flux/blob/master/site/installing.md
 
 If you are still stuck, please log an issue:
 
-    https://github.com/weaveworks/flux/issues
+    https://github.com/ContainerSolutions/flux/issues
 
 `,
 		Err: err,

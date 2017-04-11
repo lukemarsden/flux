@@ -21,8 +21,8 @@ import (
 	apiext "k8s.io/client-go/1.5/pkg/apis/extensions/v1beta1"
 	rest "k8s.io/client-go/1.5/rest"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/platform"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/platform"
 )
 
 const (

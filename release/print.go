@@ -5,7 +5,7 @@ import (
 	"io"
 	"text/tabwriter"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 func PrintResults(out io.Writer, results flux.ReleaseResult, verbose bool) {

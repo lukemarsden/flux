@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 func TempDir(t *testing.T) (string, func()) {

@@ -5,8 +5,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/guid"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/guid"
 )
 
 const (

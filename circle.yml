@@ -17,8 +17,8 @@ checkout:
     - sudo tar -C /usr/local -xzf download/$GODIST
     - mkdir -p ${GOPATH}/src/github.com/weaveworks
     - mv ${HOME}/flux ${GOPATH}/src/github.com/weaveworks/
-    - ln -s ${GOPATH}/src/github.com/weaveworks/flux ${HOME}/flux # Circle needs this to be here, apparently
-    - cd ${GOPATH}/src/github.com/weaveworks/flux
+    - ln -s ${GOPATH}/src/github.com/ContainerSolutions/flux ${HOME}/flux # Circle needs this to be here, apparently
+    - cd ${GOPATH}/src/github.com/ContainerSolutions/flux
     - sudo pip install pyyaml
     - git config --global user.email "example@example.com"
     - git config --global user.name "Weave Flux test user"
@@ -46,7 +46,7 @@ test:
     - go test -v -race -tags integration -timeout 30s $(glide novendor)
   post:
     - |
-        cd ${GOPATH}/src/github.com/weaveworks/flux
+        cd ${GOPATH}/src/github.com/ContainerSolutions/flux
         make all
 
 deployment:

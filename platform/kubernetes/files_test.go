@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/weaveworks/flux/platform/kubernetes/testdata"
+	"github.com/ContainerSolutions/flux/platform/kubernetes/testdata"
 )
 
 func TestDefinedServices(t *testing.T) {

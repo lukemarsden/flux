@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/db"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/db"
 )
 
 var (

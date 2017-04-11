@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 func testUpdate(t *testing.T, name, caseIn, updatedImage, caseOut string) {

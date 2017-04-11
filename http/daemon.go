@@ -12,10 +12,10 @@ import (
 
 	"github.com/go-kit/kit/metrics/prometheus"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/http/websocket"
-	"github.com/weaveworks/flux/platform"
-	"github.com/weaveworks/flux/platform/rpc"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/http/websocket"
+	"github.com/ContainerSolutions/flux/platform"
+	"github.com/ContainerSolutions/flux/platform/rpc"
 )
 
 // Daemon handles communication from the daemon to the service
@@ -33,7 +33,7 @@ type Daemon struct {
 }
 
 var (
-	ErrEndpointDeprecated = errors.New("Your fluxd version is deprecated - please upgrade, see https://github.com/weaveworks/flux/releases")
+	ErrEndpointDeprecated = errors.New("Your fluxd version is deprecated - please upgrade, see https://github.com/ContainerSolutions/flux/releases")
 	connectionDuration    = prometheus.NewGaugeFrom(stdprometheus.GaugeOpts{
 		Namespace: "flux",
 		Subsystem: "fluxd",

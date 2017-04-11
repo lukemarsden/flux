@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 	"strings"
 )
 

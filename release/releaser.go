@@ -10,13 +10,13 @@ import (
 	"github.com/go-kit/kit/metrics"
 	"github.com/pkg/errors"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/instance"
-	"github.com/weaveworks/flux/jobs"
-	fluxmetrics "github.com/weaveworks/flux/metrics"
-	"github.com/weaveworks/flux/notifications"
-	"github.com/weaveworks/flux/platform"
-	"github.com/weaveworks/flux/platform/kubernetes"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/instance"
+	"github.com/ContainerSolutions/flux/jobs"
+	fluxmetrics "github.com/ContainerSolutions/flux/metrics"
+	"github.com/ContainerSolutions/flux/notifications"
+	"github.com/ContainerSolutions/flux/platform"
+	"github.com/ContainerSolutions/flux/platform/kubernetes"
 )
 
 const FluxServiceName = "fluxsvc"

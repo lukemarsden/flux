@@ -8,7 +8,7 @@ import (
 
 	"github.com/docker/distribution/manifest/schema1"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 type Remote interface {

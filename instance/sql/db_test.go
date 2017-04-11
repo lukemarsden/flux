@@ -5,9 +5,9 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/db"
-	"github.com/weaveworks/flux/instance"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/db"
+	"github.com/ContainerSolutions/flux/instance"
 )
 
 func newDB(t *testing.T) *DB {

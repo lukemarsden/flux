@@ -8,12 +8,12 @@ import (
 	"github.com/go-kit/kit/log"
 	"github.com/pkg/errors"
 
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/git"
-	"github.com/weaveworks/flux/history"
-	fluxmetrics "github.com/weaveworks/flux/metrics"
-	"github.com/weaveworks/flux/platform"
-	"github.com/weaveworks/flux/registry"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/git"
+	"github.com/ContainerSolutions/flux/history"
+	fluxmetrics "github.com/ContainerSolutions/flux/metrics"
+	"github.com/ContainerSolutions/flux/platform"
+	"github.com/ContainerSolutions/flux/registry"
 )
 
 type Instancer interface {

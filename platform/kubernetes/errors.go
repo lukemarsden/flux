@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 var ErrReplicationControllersDeprecated = flux.UserConfigProblem{

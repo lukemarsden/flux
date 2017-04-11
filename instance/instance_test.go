@@ -1,8 +1,8 @@
 package instance
 
 import (
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/registry"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/registry"
 	"testing"
 )
 

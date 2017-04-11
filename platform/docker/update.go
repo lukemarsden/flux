@@ -5,8 +5,8 @@ import (
 
 	yaml "gopkg.in/yaml.v2"
 
+	"github.com/ContainerSolutions/flux"
 	"github.com/davecgh/go-spew/spew"
-	"github.com/weaveworks/flux"
 )
 
 // UpdatePodController takes the body of a ReplicationController or Deployment
@@ -32,7 +32,7 @@ func UpdatePodController(def []byte, newImageID flux.ImageID, trace io.Writer) (
 }
 
 func tryUpdate(mc *minimalCompose, newImage flux.ImageID, trace io.Writer) error {
-	for k, v := range mc.Services {
+	for _, v := range mc.Services {
 		m := v.(map[string]interface{})
 		image := m["image"].(string)
 		m["image"] = newImage.FullID()

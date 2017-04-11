@@ -2,7 +2,7 @@ package server
 
 import (
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
-	fluxmetrics "github.com/weaveworks/flux/metrics"
+	fluxmetrics "github.com/ContainerSolutions/flux/metrics"
 )
 
 var (

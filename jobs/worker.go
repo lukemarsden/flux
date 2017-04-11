@@ -7,8 +7,8 @@ import (
 	"github.com/go-kit/kit/log"
 	"github.com/pkg/errors"
 
-	"github.com/weaveworks/flux"
-	fluxmetrics "github.com/weaveworks/flux/metrics"
+	"github.com/ContainerSolutions/flux"
+	fluxmetrics "github.com/ContainerSolutions/flux/metrics"
 )
 
 const (

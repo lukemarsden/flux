@@ -4,7 +4,7 @@ import (
 	"github.com/docker/docker/client"
 	"github.com/go-kit/kit/log"
 
-	"github.com/weaveworks/flux/platform"
+	"github.com/ContainerSolutions/flux/platform"
 
 	"golang.org/x/net/context"
 )

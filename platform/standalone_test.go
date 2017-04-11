@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 func TestStandaloneMessageBus(t *testing.T) {

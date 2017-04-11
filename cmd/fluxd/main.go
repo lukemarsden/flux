@@ -14,11 +14,11 @@ import (
 	"github.com/spf13/pflag"
 	//"k8s.io/client-go/1.5/rest"
 
-	"github.com/weaveworks/flux"
-	transport "github.com/weaveworks/flux/http"
-	"github.com/weaveworks/flux/platform"
-	//"github.com/weaveworks/flux/platform/kubernetes"
-        "github.com/weaveworks/flux/platform/docker"
+	"github.com/ContainerSolutions/flux"
+	transport "github.com/ContainerSolutions/flux/http"
+	"github.com/ContainerSolutions/flux/platform"
+	//"github.com/ContainerSolutions/flux/platform/kubernetes"
+        "github.com/ContainerSolutions/flux/platform/docker"
 )
 
 var version string

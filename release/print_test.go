@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 func TestPrintResults(t *testing.T) {

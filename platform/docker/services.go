@@ -7,8 +7,8 @@ import (
 
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
-	"github.com/weaveworks/flux"
-	"github.com/weaveworks/flux/platform"
+	"github.com/ContainerSolutions/flux"
+	"github.com/ContainerSolutions/flux/platform"
 )
 
 func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platform.Service, error) {

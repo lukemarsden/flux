@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 // UpdatePodController takes the body of a ReplicationController or Deployment

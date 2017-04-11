@@ -1,7 +1,7 @@
 package instance
 
 import (
-	"github.com/weaveworks/flux"
+	"github.com/ContainerSolutions/flux"
 )
 
 type MockInstancer struct {

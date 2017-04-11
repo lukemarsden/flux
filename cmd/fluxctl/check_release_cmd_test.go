@@ -2,9 +2,9 @@ package main //+integration
 import (
 	"github.com/gorilla/mux"
 
-	"github.com/weaveworks/flux"
-	transport "github.com/weaveworks/flux/http"
-	"github.com/weaveworks/flux/jobs"
+	"github.com/ContainerSolutions/flux"
+	transport "github.com/ContainerSolutions/flux/http"
+	"github.com/ContainerSolutions/flux/jobs"
 	"testing"
 )
 

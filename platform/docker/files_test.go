@@ -7,7 +7,7 @@ import (
 )
 
 func TestFindDefinedServices(t *testing.T) {
-	ss, err := FindDefinedServices("../../")
+	ss, err := FindDefinedServices("../../demo/")
 	if err != nil {
 		t.Error(err)
 	}

@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/api/types/filters"
 	"github.com/ContainerSolutions/flux"
 	"github.com/ContainerSolutions/flux/platform"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/filters"
 )
 
 func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platform.Service, error) {
@@ -56,36 +56,38 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 	args := filters.NewArgs()
 	for _, v := range ids {
 		_, n := v.Components()
-		args.Add("name", n)
+		args.Add("name", fmt.Sprintf("%s_%s", namespace, n))
 	}
 	s, err := c.client.ServiceList(ctx, types.ServiceListOptions{args})
-	pss := make([]platform.Service, len(s))
+	pss := make([]platform.Service, len(s)-1)
 	if err != nil {
 		return pss, err
 	}
 	for k, v := range s {
-		ps := platform.Service{
-			ID:         flux.MakeServiceID(namespace, v.Spec.Annotations.Name),
-			IP:         "?",
-			Metadata:   v.Spec.Annotations.Labels,
-			Status:     string(v.UpdateStatus.State),
-			Containers: platform.ContainersOrExcuse{},
-		}
-		args := filters.NewArgs()
-		args.Add("label", fmt.Sprintf("com.docker.swarm.service.name=%v", v.Spec.Annotations.Name))
-		cs, err := c.client.ContainerList(ctx, types.ContainerListOptions{Filters: args})
-		if err != nil {
-			return pss, err
-		}
-		pcs := make([]platform.Container, len(cs))
-		for k, v := range cs {
-			pcs[k] = platform.Container{
-				Name:  v.Names[0],
-				Image: v.Image,
+		if v.Spec.Annotations.Name == fmt.Sprintf("%s_%s", namespace, "orders") {
+			ps := platform.Service{
+				ID:         flux.MakeServiceID(namespace, "orders"),
+				IP:         "?",
+				Metadata:   v.Spec.Annotations.Labels,
+				Status:     string(v.UpdateStatus.State),
+				Containers: platform.ContainersOrExcuse{},
 			}
+			args := filters.NewArgs()
+			args.Add("label", fmt.Sprintf("com.docker.swarm.service.name=%v", v.Spec.Annotations.Name))
+			cs, err := c.client.ContainerList(ctx, types.ContainerListOptions{Filters: args})
+			if err != nil {
+				return pss, err
+			}
+			pcs := make([]platform.Container, len(cs))
+			for k, v := range cs {
+				pcs[k] = platform.Container{
+					Name:  v.Names[0],
+					Image: v.Image,
+				}
+			}
+			ps.Containers.Containers = pcs
+			pss[k] = ps
 		}
-		ps.Containers.Containers = pcs
-		pss[k] = ps
 	}
 	return pss, nil
 }

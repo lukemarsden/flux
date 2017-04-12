@@ -106,50 +106,48 @@ func (r *Releaser) release(instanceID flux.InstanceID, job *jobs.Job, logStatus 
 	logStatus("Finding defined services.")
 	timer = NewStageTimer("select_services")
 	var updates []*ServiceUpdate
-	/*
-			updates, err = selectServices(rc, &spec, results, logStatus)
-			timer.ObserveDuration()
-			if err != nil {
-				return nil, err
-			}
-			logStatus("Found %d services.", len(updates))
-			report(results)
+	updates, err = selectServices(rc, &spec, results, logStatus)
+	timer.ObserveDuration()
+	if err != nil {
+		return nil, err
+	}
+	logStatus("Found %d services.", len(updates))
+	report(results)
 
-			// Look up images, and calculate updates, if we've been asked to
-			if spec.ImageSpec != flux.ImageSpecNone {
-				logStatus("Looking up images.")
-				timer = NewStageTimer("lookup_images")
-				// Figure out how the services are to be updated.
-				updates, err = calculateImageUpdates(rc.Instance, updates, &spec, results, logStatus)
-				timer.ObserveDuration()
-				if err != nil {
-					return nil, err
-				}
-				report(results)
-			}
-
-			// At this point we may have filtered the updates we can do down
-			// to nothing. Check and exit early if so.
-			if len(updates) == 0 {
-				logStatus("No updates to do, finishing.")
-				return nil, nil
-			}
-
-			// If it's a dry run, we're done.
-			if spec.Kind == flux.ReleaseKindPlan {
-				return nil, nil
-			}
-
-		if spec.ImageSpec != flux.ImageSpecNone {
-			logStatus("Pushing changes.")
-			timer = NewStageTimer("push_changes")
-			err = rc.PushChanges(updates, &spec)
-			timer.ObserveDuration()
-			if err != nil {
-				return nil, err
-			}
+	// Look up images, and calculate updates, if we've been asked to
+	if spec.ImageSpec != flux.ImageSpecNone {
+		logStatus("Looking up images.")
+		timer = NewStageTimer("lookup_images")
+		// Figure out how the services are to be updated.
+		updates, err = calculateImageUpdates(rc.Instance, updates, &spec, results, logStatus)
+		timer.ObserveDuration()
+		if err != nil {
+			return nil, err
 		}
-	*/
+		report(results)
+	}
+
+	// At this point we may have filtered the updates we can do down
+	// to nothing. Check and exit early if so.
+	if len(updates) == 0 {
+		logStatus("No updates to do, finishing.")
+		return nil, nil
+	}
+
+	// If it's a dry run, we're done.
+	if spec.Kind == flux.ReleaseKindPlan {
+		return nil, nil
+	}
+
+	if spec.ImageSpec != flux.ImageSpecNone {
+		logStatus("Pushing changes.")
+		timer = NewStageTimer("push_changes")
+		err = rc.PushChanges(updates, &spec)
+		timer.ObserveDuration()
+		if err != nil {
+			return nil, err
+		}
+	}
 
 	logStatus("Applying changes.")
 	timer = NewStageTimer("apply_changes")

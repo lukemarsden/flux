@@ -7,9 +7,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/ContainerSolutions/flux/platform/docker"
 	"github.com/ContainerSolutions/flux"
 	"github.com/ContainerSolutions/flux/instance"
+	"github.com/ContainerSolutions/flux/platform/docker"
 )
 
 type ReleaseContext struct {

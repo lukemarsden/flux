@@ -6,6 +6,7 @@ import (
 
 	"github.com/docker/docker/client"
 	"github.com/go-kit/kit/log"
+	"io/ioutil"
 	"os"
 	"os/exec"
 
@@ -38,27 +39,18 @@ func (c *Swarm) Apply(defs []platform.ServiceDefinition) error {
 	stack_name := "dockerswarm"
 	bin, err := findBinary("docker")
 
-	if compose_files, err := ioutil.ReadDir(""); err != nil {
-		c.logger.log(err)
-	}
+	fmt.Println(defs)
 
-	if tmpfile, err := ioutil.TempFile("", "docker-compose.yml"); err != nil {
-		c.logger.log(err)
+	compose_files, err := ioutil.ReadDir("")
+	if err != nil {
+		c.logger.Log(err)
 	}
-	defer os.Remove(tmpfile.Name()) // clean up
 
 	for _, file_name := range compose_files {
-		if ext := filepath.Ext(file_name); ext == ".yaml" || ext == ".yml" {
-			content, err := ioutil.ReadFile(file_name)
-			if err != nil {
-				c.logger.log(err)
-			}
-			tmpfile.Write(content)
-		}
+		cmd := exec.Command(bin, "deploy", "-c", file_name.Name(), stack_name)
+		err = cmd.Run()
 	}
 
-	cmd := exec.Command(bin, "deploy", "-c", tmpfile, stack_name)
-	err = cmd.Run()
 	return err
 }
 

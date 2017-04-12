@@ -1,7 +1,6 @@
 package docker
 
 import (
-	"errors"
 	"io"
 
 	yaml "gopkg.in/yaml.v2"
@@ -31,21 +30,11 @@ func UpdatePodController(def []byte, newImageID flux.ImageID, trace io.Writer) (
 	return
 }
 
-func tryUpdate(mc *minimalCompose, newImage flux.ImageID, trace io.Writer) (err error) {
-	for _, mcv := range mc.Services {
-		var m map[interface{}]interface{}
-		var ok bool
-		if m, ok = mcv.(map[interface{}]interface{}); !ok {
-			return errors.New("Possible malformed yaml")
-		}
-		for mk, _ := range m {
-			if i, ok := mk.(string); ok {
-				if i == "image" {
-					m[mk] = newImage.FullID()
-					mcv = m
-				}
-			}
-		}
+func tryUpdate(mc *minimalCompose, newImage flux.ImageID, trace io.Writer) error {
+	for _, v := range mc.Services {
+		m := v.(map[string]interface{})
+		m["image"] = newImage.FullID()
 	}
-	return
+	return nil
+
 }

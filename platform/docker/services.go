@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/api/types/filters"
 	"github.com/ContainerSolutions/flux"
 	"github.com/ContainerSolutions/flux/platform"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/filters"
 )
 
 func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platform.Service, error) {
@@ -21,10 +21,10 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 	}
 	for k, v := range s {
 		ps := platform.Service{
-			ID:         flux.MakeServiceID(namespace, v.Spec.Annotations.Name),
-			IP:         "?",
-			Metadata:   v.Spec.Annotations.Labels,
-			Status:     string(v.UpdateStatus.State),
+			ID:       flux.MakeServiceID(namespace, v.Spec.Annotations.Name),
+			IP:       "?",
+			Metadata: v.Spec.Annotations.Labels,
+			//			Status:     string(v.UpdateStatus.State),
 			Containers: platform.ContainersOrExcuse{},
 		}
 		if ignore.Contains(ps.ID) {

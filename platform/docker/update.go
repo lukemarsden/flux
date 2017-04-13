@@ -32,7 +32,7 @@ func UpdatePodController(def []byte, newImageID flux.ImageID, trace io.Writer) (
 
 func tryUpdate(mc *minimalCompose, newImage flux.ImageID, trace io.Writer) error {
 	for _, v := range mc.Services {
-		m := v.(map[string]interface{})
+		m := v.(map[interface{}]interface{})
 		m["image"] = newImage.FullID()
 	}
 	return nil

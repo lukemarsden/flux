@@ -16,7 +16,8 @@ import (
 	fluxmetrics "github.com/ContainerSolutions/flux/metrics"
 	"github.com/ContainerSolutions/flux/notifications"
 	"github.com/ContainerSolutions/flux/platform"
-	"github.com/ContainerSolutions/flux/platform/kubernetes"
+	"github.com/ContainerSolutions/flux/platform/docker"
+	//"github.com/ContainerSolutions/flux/platform/kubernetes"
 )
 
 const FluxServiceName = "fluxsvc"
@@ -357,7 +358,7 @@ func calculateImageUpdates(inst *instance.Instance, candidates []*ServiceUpdate,
 				continue
 			}
 
-			update.ManifestBytes, err = kubernetes.UpdatePodController(update.ManifestBytes, latestImage.ID, ioutil.Discard)
+			update.ManifestBytes, err = docker.UpdatePodController(update.ManifestBytes, latestImage.ID, ioutil.Discard)
 			if err != nil {
 				logStatus("Failed on service %s: %s", update.ServiceID, err.Error())
 				return nil, err

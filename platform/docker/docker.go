@@ -36,18 +36,29 @@ func NewSwarm(logger log.Logger) (*Swarm, error) {
 }
 
 func (c *Swarm) Apply(defs []platform.ServiceDefinition) error {
-	stack_name := "dockerswarm"
+	stack_name := "default_swarm"
 	bin, err := findBinary("docker")
 
-	fmt.Println(defs)
-
-	compose_files, err := ioutil.ReadDir("")
 	if err != nil {
 		c.logger.Log(err)
 	}
 
-	for _, file_name := range compose_files {
-		cmd := exec.Command(bin, "deploy", "-c", file_name.Name(), stack_name)
+	for _, svc := range defs {
+		tmpfile, err := ioutil.TempFile("", "temp")
+		if err != nil {
+			c.logger.Log(err)
+		}
+
+		defer os.Remove(tmpfile.Name()) //clean up
+
+		if _, err := tmpfile.Write(svc.NewDefinition); err != nil {
+			c.logger.Log(err)
+		}
+		if err := tmpfile.Close(); err != nil {
+			c.logger.Log(err)
+		}
+
+		cmd := exec.Command(bin, "deploy", "-c", tmpfile.Name(), stack_name)
 		err = cmd.Run()
 	}
 

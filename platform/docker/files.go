@@ -12,6 +12,7 @@ import (
 )
 
 type minimalCompose struct {
+	Version  string                 `yaml:"version"`
 	Services map[string]interface{} `yaml:"services"`
 }
 

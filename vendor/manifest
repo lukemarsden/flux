@@ -211,6 +211,15 @@
 			"notests": true
 		},
 		{
+			"importpath": "github.com/davecgh/go-spew/spew",
+			"repository": "https://github.com/davecgh/go-spew",
+			"vcs": "git",
+			"revision": "346938d642f2ec3594ed81d874461961cd0faa76",
+			"branch": "master",
+			"path": "/spew",
+			"notests": true
+		},
+		{
 			"importpath": "github.com/docker/distribution",
 			"repository": "https://github.com/docker/distribution",
 			"vcs": "git",

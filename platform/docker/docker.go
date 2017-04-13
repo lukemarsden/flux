@@ -67,10 +67,9 @@ func (c *Swarm) Apply(defs []platform.ServiceDefinition) error {
 		err = cmd.Run()
 
 		if err != nil {
-			fmt.Println(stderr.String())
+			c.logger.Log(stderr.String())
 		}
-		fmt.Println(stdout.String())
-
+		c.logger.Log(stdout.String())
 	}
 
 	return err

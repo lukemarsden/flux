@@ -9,6 +9,7 @@ import (
 	"github.com/ContainerSolutions/flux/platform"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
+	"github.com/docker/docker/api/types/swarm"
 )
 
 func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platform.Service, error) {
@@ -59,35 +60,46 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 		args.Add("name", fmt.Sprintf("%s_%s", namespace, n))
 	}
 	s, err := c.client.ServiceList(ctx, types.ServiceListOptions{args})
-	pss := make([]platform.Service, len(s)-1)
+
+	pss := make([]platform.Service, 0)
 	if err != nil {
 		return pss, err
 	}
-	for k, v := range s {
-		if v.Spec.Annotations.Name == fmt.Sprintf("%s_%s", namespace, "orders") {
-			ps := platform.Service{
-				ID:         flux.MakeServiceID(namespace, "orders"),
-				IP:         "?",
-				Metadata:   v.Spec.Annotations.Labels,
-				Status:     string(v.UpdateStatus.State),
-				Containers: platform.ContainersOrExcuse{},
+
+	// Filter out excessive services since ServiceList doesn't match explicitly
+	d := make([]swarm.Service, 0)
+	for _, v := range s {
+		for _, k := range ids {
+			_, n := k.Components()
+			if n == v.Spec.Networks[0].Aliases[0] {
+				d = append(d, v)
 			}
-			args := filters.NewArgs()
-			args.Add("label", fmt.Sprintf("com.docker.swarm.service.name=%v", v.Spec.Annotations.Name))
-			cs, err := c.client.ContainerList(ctx, types.ContainerListOptions{Filters: args})
-			if err != nil {
-				return pss, err
-			}
-			pcs := make([]platform.Container, len(cs))
-			for k, v := range cs {
-				pcs[k] = platform.Container{
-					Name:  v.Names[0],
-					Image: v.Image,
-				}
-			}
-			ps.Containers.Containers = pcs
-			pss[k] = ps
 		}
+	}
+
+	for _, v := range d {
+		ps := platform.Service{
+			ID:         flux.MakeServiceID(namespace, v.Spec.Networks[0].Aliases[0]),
+			IP:         "?",
+			Metadata:   v.Spec.Annotations.Labels,
+			Status:     string(v.UpdateStatus.State),
+			Containers: platform.ContainersOrExcuse{},
+		}
+		args := filters.NewArgs()
+		args.Add("label", fmt.Sprintf("com.docker.swarm.service.name=%v", v.Spec.Annotations.Name))
+		cs, err := c.client.ContainerList(ctx, types.ContainerListOptions{Filters: args})
+		if err != nil {
+			return pss, err
+		}
+		pcs := make([]platform.Container, len(cs))
+		for k, v := range cs {
+			pcs[k] = platform.Container{
+				Name:  v.Names[0],
+				Image: v.Image,
+			}
+		}
+		ps.Containers.Containers = pcs
+		pss = append(pss, ps)
 	}
 	return pss, nil
 }

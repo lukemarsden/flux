@@ -1,6 +1,7 @@
 FROM alpine:3.5
 WORKDIR /home/flux
-RUN apk add --no-cache ca-certificates tini docker
+RUN apk add --no-cache ca-certificates tini
+RUN apk add docker --update-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted
 COPY ./kubectl /usr/local/bin/
 COPY ./fluxd /usr/local/bin/
 ENTRYPOINT [ "/sbin/tini", "--", "fluxd" ]

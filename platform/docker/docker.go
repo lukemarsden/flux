@@ -1,6 +1,7 @@
 package docker
 
 import (
+	"bytes"
 	"fmt"
 	"path/filepath"
 
@@ -37,6 +38,8 @@ func NewSwarm(logger log.Logger) (*Swarm, error) {
 
 func (c *Swarm) Apply(defs []platform.ServiceDefinition) error {
 	stack_name := "default_swarm"
+	stderr := &bytes.Buffer{}
+	stdout := &bytes.Buffer{}
 	bin, err := findBinary("docker")
 
 	if err != nil {
@@ -59,7 +62,15 @@ func (c *Swarm) Apply(defs []platform.ServiceDefinition) error {
 		}
 
 		cmd := exec.Command(bin, "deploy", "-c", tmpfile.Name(), stack_name)
+		cmd.Stderr = stderr
+		cmd.Stdout = stdout
 		err = cmd.Run()
+
+		if err != nil {
+			fmt.Println(stderr.String())
+		}
+		fmt.Println(stdout.String())
+
 	}
 
 	return err

@@ -12,6 +12,7 @@ import (
 )
 
 type minimalCompose struct {
+	Version  string                 `yaml:"version"`
 	Services map[string]interface{} `yaml:"services"`
 }
 
@@ -22,6 +23,10 @@ type minimalCompose struct {
 func FindDefinedServices(path string) (map[flux.ServiceID][]string, error) {
 	var files []string
 	filepath.Walk(path, func(target string, info os.FileInfo, err error) error {
+		if err != nil {
+			fmt.Println(err)
+			return nil
+		}
 		if info.IsDir() {
 			return nil
 		}
@@ -42,6 +47,7 @@ func FindDefinedServices(path string) (map[flux.ServiceID][]string, error) {
 		if err != nil {
 			continue
 		}
+
 		if len(def.Services) > 1 {
 			return services, fmt.Errorf("Expected one service per yaml found %v in %v", len(def.Services), file)
 		}

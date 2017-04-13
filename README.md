@@ -27,10 +27,11 @@ you can use the docker-compose in this to launch the fluxsvc and fluxd
 example flux.conf
 ```
 git:
-  URL: "https://github.com/ContainerSolutions/flux-demo.git"
-  path: ""
-  branch: "master"
-  key: ""
+  URL: git@github.com:ContainerSolutions/flux-demo.git
+  path: 
+  branch: master
+  key: |
+      #put key I gave you here
 slack:
   hookURL: ""
   username: ""

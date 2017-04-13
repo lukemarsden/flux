@@ -1,3 +1,54 @@
+# For Luke
+
+after cloning
+
+```
+gvt restore
+make
+```
+This of course requires setup on your machine
+
+clone this repo somewhere
+
+```
+git clone https://github.com/ContainerSolutions/flux-demo
+```
+All the services in the repo need to be launched individually
+
+```
+docker deploy -c finename.yml default_swarm
+```
+So K8s had namespaces in the definitions, swarm does not appear to have that, so for now we are hard coding. 
+Will be putting it into the config file, once I find how to save in DB.
+*So stack needs to be default_swarm*
+
+you can use the docker-compose in this to launch the fluxsvc and fluxd
+
+example flux.conf
+```
+git:
+  URL: "https://github.com/ContainerSolutions/flux-demo.git"
+  path: ""
+  branch: "master"
+  key: ""
+slack:
+  hookURL: ""
+  username: ""
+  releaseTemplate: ""
+registry:
+  auths: {}
+```
+
+then set the config in fluxctl
+
+you can list services
+
+and update a service
+
+list images is problematic because io.docker seems to timeout.
+
+
+
 # Flux
 
 Flux is a tool for deploying container images to Kubernetes clusters.

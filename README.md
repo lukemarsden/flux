@@ -41,14 +41,15 @@ docker swarm init
 for svc in *.yml; do docker deploy -c $svc default_swarm; done
 ```
 
-Edit the flux.conf in flux-demo repo including the key given then set the config in fluxctl
+### Flux
 
 ```
-fluxctl set-config -f flux.conf
-```
-Set env variable before executing any commands
-```
 export FLUX_URL=http://localhost:3030/api/flux
+```
+
+Edit the flux.conf in flux-demo repo including the key given then set the config in fluxctl
+```
+fluxctl set-config -f flux.conf
 ```
 you can then list services
 ```

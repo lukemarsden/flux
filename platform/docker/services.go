@@ -7,7 +7,6 @@ import (
 
 	"github.com/ContainerSolutions/flux"
 	"github.com/ContainerSolutions/flux/platform"
-	"github.com/davecgh/go-spew/spew"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/api/types/swarm"

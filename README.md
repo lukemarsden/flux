@@ -1,61 +1,48 @@
 # For Luke
 
-Docker needs to be setup with experimental flag enabled
 
-and swarm mode turned on
-
-```
-docker swarm init
-```
-
-Go and gvt needs to be setup on your machine
-
-
-get flux-swarm
+## Caveats
 
 ```
+So K8s had namespaces in the definitions, swarm does not appear to have that, so for now we are hard coding.
+Will be putting it into the config file, once I find how to save in DB.
+*So stack needs to be default_swarm*
+```
+
+## Requirements
+
+```
+go 1.5+
+gvt
+docker 1.12+
+docker-compose
+make
+```
+
+## Installation
+
+```
+docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock golang:1.7.5 bash
+
+
+### Within the docker container
+
 go get github.com/ContainerSolutions/flux
-```
-
-after cloning
-
-```
 cd $GOPATH/src/github.com/ContainerSolutions/flux
 gvt restore
 make
-
-
-```
-
-you can use the docker-compose in this folder to launch fluxsvc and fluxd
-
-```
 docker-compose up
-```
-
-and set the flux url config
-```
 export FLUX_URL=http://localhost:3030/api/flux
-```
-
-clone the deploy scripts repo somewhere
-
-```
 cd ~/
 git clone https://github.com/ContainerSolutions/flux-demo
-```
-All the services in the repo need to be launched individually
-
-```
 cd ~/flux-demo
+
+docker swarm init
 for svc in *.yml; do docker deploy -c $svc default_swarm; done
 ```
 
-So K8s had namespaces in the definitions, swarm does not appear to have that, so for now we are hard coding. 
-Will be putting it into the config file, once I find how to save in DB.
-*So stack needs to be default_swarm*
 
-
+## Demo
 create a flux.conf with these contents and the deploy key Jason can provide
 ```
 git:
@@ -77,11 +64,16 @@ then set the config in fluxctl
 fluxctl set-config -f flux.conf
 ```
 you can list services
+```
+fluxctl list-services
+```
 
 and update a service
+```
+fluxctl release --service=default_swarm/orders --update-image=weaveworks/orders:master-
+```
 
 list images is problematic because io.docker seems to timeout.
-
 
 
 # Flux

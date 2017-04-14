@@ -1,6 +1,3 @@
-
-
-
 ## Caveats
 
 ```
@@ -12,11 +9,7 @@ Will be putting it into the config file, once I find how to save in DB.
 ## Requirements
 
 ```
-go 1.5+
-gvt
 docker 1.12+
-docker-compose
-make
 ```
 
 ## Installation
@@ -26,11 +19,15 @@ docker run --rm -it --net=host -v /var/run/docker.sock:/var/run/docker.sock gola
 
 ### Within the docker container
 
+curl -sSL https://get.docker.com/ | sh
+
 curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
 curl -o /usr/local/bin/fluxctl -sSL https://github.com/weaveworks/flux/releases/download/master-0d109dd/fluxctl_linux_amd64
 chmod +x /usr/local/bin/fluxctl
+
+go get -u github.com/FiloSottile/gvt
 
 go get github.com/ContainerSolutions/flux
 cd $GOPATH/src/github.com/ContainerSolutions/flux
@@ -48,35 +45,22 @@ for svc in *.yml; do docker deploy -c $svc default_swarm; done
 
 
 ## Demo
-create a flux.conf with these contents and the deploy key Jason can provide
-```
-git:
-  URL: git@github.com:ContainerSolutions/flux-demo.git
-  path: 
-  branch: master
-  key: |
-      #put key I gave you here
-slack:
-  hookURL: ""
-  username: ""
-  releaseTemplate: ""
-registry:
-  auths: {}
-```
-
-then set the config in fluxctl
+Edit the flux.conf in flux-demo repo including the key given then set the config in fluxctl
 ```
 fluxctl set-config -f flux.conf
 ```
+Set env variable before executing any commands
+```
 export FLUX_URL=http://localhost:3030/api/flux
-you can list services
+```
+you can then list services
 ```
 fluxctl list-services
 ```
 
 and update a service
 ```
-fluxctl release --service=default_swarm/orders --update-image=weaveworks/orders:master-
+fluxctl release --service=default_swarm/orders --update-image=weaveworks/orders:master-ff176275
 ```
 
 list images is problematic because io.docker seems to timeout.

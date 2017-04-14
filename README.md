@@ -1,24 +1,22 @@
 ## Caveats
 
-```
 So K8s had namespaces in the definitions, swarm does not appear to have that, so for now we are hard coding.
 Will be putting it into the config file, once I find how to save in DB.
 *So stack needs to be default_swarm*
-```
 
 ## Requirements
 
-```
-docker 1.12+
-```
+* docker 1.12+
 
 ## Installation
 
 ```
 docker run --rm -it --net=host -v /var/run/docker.sock:/var/run/docker.sock golang:1.7.5 bash
+```
 
 ### Within the docker container
 
+```
 curl -sSL https://get.docker.com/ | sh
 
 curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -43,9 +41,8 @@ docker swarm init
 for svc in *.yml; do docker deploy -c $svc default_swarm; done
 ```
 
-
-## Demo
 Edit the flux.conf in flux-demo repo including the key given then set the config in fluxctl
+
 ```
 fluxctl set-config -f flux.conf
 ```

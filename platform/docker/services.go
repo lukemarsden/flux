@@ -7,6 +7,7 @@ import (
 
 	"github.com/ContainerSolutions/flux"
 	"github.com/ContainerSolutions/flux/platform"
+	"github.com/davecgh/go-spew/spew"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/filters"
 	"github.com/docker/docker/api/types/swarm"
@@ -22,7 +23,7 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 	}
 	for k, v := range s {
 		ps := platform.Service{
-			ID:       flux.MakeServiceID(namespace, v.Spec.Annotations.Name),
+			ID:       flux.MakeServiceID("default_swarm", v.Spec.Networks[0].Aliases[0]),
 			IP:       "?",
 			Metadata: v.Spec.Annotations.Labels,
 			//			Status:     string(v.UpdateStatus.State),
@@ -40,7 +41,7 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 		pcs := make([]platform.Container, len(cs))
 		for k, v := range cs {
 			pcs[k] = platform.Container{
-				Name:  v.Names[0],
+				Name:  v.Labels["com.docker.swarm.task.name"],
 				Image: v.Image,
 			}
 		}

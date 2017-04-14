@@ -80,10 +80,10 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 
 	for _, v := range d {
 		ps := platform.Service{
-			ID:         flux.MakeServiceID(namespace, v.Spec.Networks[0].Aliases[0]),
-			IP:         "?",
-			Metadata:   v.Spec.Annotations.Labels,
-			Status:     string(v.UpdateStatus.State),
+			ID:       flux.MakeServiceID(namespace, v.Spec.Networks[0].Aliases[0]),
+			IP:       "?",
+			Metadata: v.Spec.Annotations.Labels,
+			//Status:     string(v.UpdateStatus.State),
 			Containers: platform.ContainersOrExcuse{},
 		}
 		args := filters.NewArgs()

@@ -1,4 +1,4 @@
-# For Luke
+
 
 
 ## Caveats
@@ -22,17 +22,22 @@ make
 ## Installation
 
 ```
-docker run --rm -it -v /var/run/docker.sock:/var/run/docker.sock golang:1.7.5 bash
-
+docker run --rm -it --net=host -v /var/run/docker.sock:/var/run/docker.sock golang:1.7.5 bash
 
 ### Within the docker container
+
+curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+
+curl -o /usr/local/bin/fluxctl -sSL https://github.com/weaveworks/flux/releases/download/master-0d109dd/fluxctl_linux_amd64
+chmod +x /usr/local/bin/fluxctl
 
 go get github.com/ContainerSolutions/flux
 cd $GOPATH/src/github.com/ContainerSolutions/flux
 gvt restore
 make
 docker-compose up
-export FLUX_URL=http://localhost:3030/api/flux
+
 cd ~/
 git clone https://github.com/ContainerSolutions/flux-demo
 cd ~/flux-demo
@@ -63,6 +68,7 @@ then set the config in fluxctl
 ```
 fluxctl set-config -f flux.conf
 ```
+export FLUX_URL=http://localhost:3030/api/flux
 you can list services
 ```
 fluxctl list-services
@@ -126,3 +132,5 @@ If you have any questions about Flux and continuous delivery:
 - <a href="https://github.com/ContainerSolutions/flux/issues/new">File an issue.</a>
 
 Your feedback is always welcome!
+
+curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose

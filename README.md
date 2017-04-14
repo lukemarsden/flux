@@ -58,7 +58,7 @@ fluxctl list-services
 
 and update a service
 ```
-fluxctl release --service=default_swarm/orders --update-image=weaveworks/orders:master-ff176275
+fluxctl release --service=default_swarm/orders --update-image=weaveworksdemos/orders:master-ff176275
 ```
 
 list images is problematic because io.docker seems to timeout.

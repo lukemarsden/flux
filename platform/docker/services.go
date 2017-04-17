@@ -33,6 +33,19 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 		}
 		args := filters.NewArgs()
 		args.Add("label", fmt.Sprintf("com.docker.swarm.service.name=%v", v.Spec.Annotations.Name))
+		/// OLD
+		cs, err := c.client.ContainerList(ctx, types.ContainerListOptions{Filters: args})
+		if err != nil {
+			return pss, err
+		}
+		oldPcs := make([]platform.Container, len(cs))
+		for k, v := range cs {
+			oldPcs[k] = platform.Container{
+				Name:  v.Labels["com.docker.swarm.task.name"],
+				Image: v.Image,
+			}
+		}
+		/// NEW
 		ts, err := c.client.TaskList(ctx, types.TaskListOptions{Filters: args})
 		if err != nil {
 			return pss, err
@@ -44,6 +57,10 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 				Image: t.Spec.ContainerSpec.Image,
 			}
 		}
+
+		/// LOG
+		log.Printf("[AllServices] OLD: %v, NEW: %v", oldPcs, pcs)
+
 		ps.Containers.Containers = pcs
 		pss[k] = ps
 	}
@@ -87,6 +104,19 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 		}
 		args := filters.NewArgs()
 		args.Add("label", fmt.Sprintf("com.docker.swarm.service.name=%v", v.Spec.Annotations.Name))
+		/// OLD
+		cs, err := c.client.ContainerList(ctx, types.ContainerListOptions{Filters: args})
+		if err != nil {
+			return pss, err
+		}
+		oldPcs := make([]platform.Container, len(cs))
+		for k, v := range cs {
+			oldPcs[k] = platform.Container{
+				Name:  v.Names[0],
+				Image: v.Image,
+			}
+		}
+		/// NEW
 		ts, err := c.client.TaskList(ctx, types.TaskListOptions{Filters: args})
 		if err != nil {
 			return pss, err
@@ -98,6 +128,9 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 				Image: t.Spec.ContainerSpec.Image,
 			}
 		}
+		/// LOG
+		log.Printf("[SomeServices] OLD: %v, NEW: %v", oldPcs, pcs)
+
 		ps.Containers.Containers = pcs
 		pss = append(pss, ps)
 	}

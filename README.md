@@ -29,6 +29,9 @@ go get -u github.com/FiloSottile/gvt
 
 go get github.com/ContainerSolutions/flux
 cd $GOPATH/src/github.com/ContainerSolutions/flux
+git remote add lukefork https://github.com/lukemarsden/flux
+git fetch lukefork
+git checkout lukefork/master
 gvt restore
 make
 docker-compose up
@@ -37,7 +40,6 @@ cd ~/
 git clone https://github.com/ContainerSolutions/flux-demo
 cd ~/flux-demo
 
-docker swarm init
 for svc in *.yml; do docker deploy -c $svc default_swarm; done
 ```
 

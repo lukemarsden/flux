@@ -21,31 +21,33 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 		return pss, err
 	}
 	for k, v := range s {
-		ps := platform.Service{
-			ID:       flux.MakeServiceID("default_swarm", v.Spec.Networks[0].Aliases[0]),
-			IP:       "?",
-			Metadata: v.Spec.Annotations.Labels,
-			//			Status:     string(v.UpdateStatus.State),
-			Containers: platform.ContainersOrExcuse{},
-		}
-		if ignore.Contains(ps.ID) {
-			continue
-		}
-		args := filters.NewArgs()
-		args.Add("service", v.ID)
-		ts, err := c.client.TaskList(ctx, types.TaskListOptions{Filters: args})
-		if err != nil {
-			return pss, err
-		}
-		pcs := make([]platform.Container, len(ts))
-		for k, t := range ts {
-			pcs[k] = platform.Container{
-				Name:  fmt.Sprintf("%s.%d.%s", v.Spec.Name, t.Slot, t.ID),
-				Image: t.Spec.ContainerSpec.Image,
+		if len(v.Spec.Networks) > 0 && len(v.Spec.Networks[0].Aliases) > 0 {
+			ps := platform.Service{
+				ID:       flux.MakeServiceID("default_swarm", v.Spec.Networks[0].Aliases[0]),
+				IP:       "?",
+				Metadata: v.Spec.Annotations.Labels,
+				//			Status:     string(v.UpdateStatus.State),
+				Containers: platform.ContainersOrExcuse{},
 			}
+			if ignore.Contains(ps.ID) {
+				continue
+			}
+			args := filters.NewArgs()
+			args.Add("service", v.ID)
+			ts, err := c.client.TaskList(ctx, types.TaskListOptions{Filters: args})
+			if err != nil {
+				return pss, err
+			}
+			pcs := make([]platform.Container, len(ts))
+			for k, t := range ts {
+				pcs[k] = platform.Container{
+					Name:  fmt.Sprintf("%s.%d.%s", v.Spec.Name, t.Slot, t.ID),
+					Image: t.Spec.ContainerSpec.Image,
+				}
+			}
+			ps.Containers.Containers = pcs
+			pss[k] = ps
 		}
-		ps.Containers.Containers = pcs
-		pss[k] = ps
 	}
 	return pss, nil
 }
@@ -71,35 +73,40 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 	for _, v := range s {
 		for _, k := range ids {
 			_, n := k.Components()
-			if n == v.Spec.Networks[0].Aliases[0] {
-				d = append(d, v)
+
+			if len(v.Spec.Networks) > 0 && len(v.Spec.Networks[0].Aliases) > 0 {
+				if n == v.Spec.Networks[0].Aliases[0] {
+					d = append(d, v)
+				}
 			}
 		}
 	}
 
 	for _, v := range d {
-		ps := platform.Service{
-			ID:       flux.MakeServiceID(namespace, v.Spec.Networks[0].Aliases[0]),
-			IP:       "?",
-			Metadata: v.Spec.Annotations.Labels,
-			//Status:     string(v.UpdateStatus.State),
-			Containers: platform.ContainersOrExcuse{},
-		}
-		args := filters.NewArgs()
-		args.Add("service", v.ID)
-		ts, err := c.client.TaskList(ctx, types.TaskListOptions{Filters: args})
-		if err != nil {
-			return pss, err
-		}
-		pcs := make([]platform.Container, len(ts))
-		for k, t := range ts {
-			pcs[k] = platform.Container{
-				Name:  fmt.Sprintf("%s.%d.%s", v.Spec.Name, t.Slot, t.ID),
-				Image: t.Spec.ContainerSpec.Image,
+		if len(v.Spec.Networks) > 0 && len(v.Spec.Networks[0].Aliases) > 0 {
+			ps := platform.Service{
+				ID:       flux.MakeServiceID(namespace, v.Spec.Networks[0].Aliases[0]),
+				IP:       "?",
+				Metadata: v.Spec.Annotations.Labels,
+				//Status:     string(v.UpdateStatus.State),
+				Containers: platform.ContainersOrExcuse{},
 			}
+			args := filters.NewArgs()
+			args.Add("service", v.ID)
+			ts, err := c.client.TaskList(ctx, types.TaskListOptions{Filters: args})
+			if err != nil {
+				return pss, err
+			}
+			pcs := make([]platform.Container, len(ts))
+			for k, t := range ts {
+				pcs[k] = platform.Container{
+					Name:  fmt.Sprintf("%s.%d.%s", v.Spec.Name, t.Slot, t.ID),
+					Image: t.Spec.ContainerSpec.Image,
+				}
+			}
+			ps.Containers.Containers = pcs
+			pss = append(pss, ps)
 		}
-		ps.Containers.Containers = pcs
-		pss = append(pss, ps)
 	}
 	return pss, nil
 }

@@ -37,10 +37,10 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 		if err != nil {
 			return pss, err
 		}
-		pcs := make([]platform.Container, len(cs))
+		pcs := make([]platform.Container, len(ts))
 		for k, t := range ts {
 			pcs[k] = platform.Container{
-				Name:  t.Spec.Annotations.Name,
+				Name:  t.Name,
 				Image: t.Spec.ContainerSpec.Image,
 			}
 		}
@@ -91,10 +91,10 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 		if err != nil {
 			return pss, err
 		}
-		pcs := make([]platform.Container, len(cs))
+		pcs := make([]platform.Container, len(ts))
 		for k, t := range ts {
 			pcs[k] = platform.Container{
-				Name:  t.Spec.Annotations.Name,
+				Name:  t.Name,
 				Image: t.Spec.ContainerSpec.Image,
 			}
 		}

@@ -135,7 +135,7 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 		pcs := make([]platform.Container, len(ts))
 		for k, t := range ts {
 			pcs[k] = platform.Container{
-				Name:  t.Name,
+				Name:  fmt.Sprintf("%s.%d.%s", v.Spec.Name, t.Slot, t.ID),
 				Image: t.Spec.ContainerSpec.Image,
 			}
 		}

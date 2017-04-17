@@ -33,15 +33,15 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 		}
 		args := filters.NewArgs()
 		args.Add("label", fmt.Sprintf("com.docker.swarm.service.name=%v", v.Spec.Annotations.Name))
-		cs, err := c.client.ContainerList(ctx, types.ContainerListOptions{Filters: args})
+		ts, err := c.client.TaskList(ctx, types.TaskListOptions{Filters: args})
 		if err != nil {
 			return pss, err
 		}
 		pcs := make([]platform.Container, len(cs))
-		for k, v := range cs {
+		for k, t := range ts {
 			pcs[k] = platform.Container{
-				Name:  v.Labels["com.docker.swarm.task.name"],
-				Image: v.Image,
+				Name:  t.Spec.Annotations.Name,
+				Image: t.Spec.ContainerSpec.Image,
 			}
 		}
 		ps.Containers.Containers = pcs
@@ -87,15 +87,15 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 		}
 		args := filters.NewArgs()
 		args.Add("label", fmt.Sprintf("com.docker.swarm.service.name=%v", v.Spec.Annotations.Name))
-		cs, err := c.client.ContainerList(ctx, types.ContainerListOptions{Filters: args})
+		ts, err := c.client.TaskList(ctx, types.TaskListOptions{Filters: args})
 		if err != nil {
 			return pss, err
 		}
 		pcs := make([]platform.Container, len(cs))
-		for k, v := range cs {
+		for k, t := range ts {
 			pcs[k] = platform.Container{
-				Name:  v.Names[0],
-				Image: v.Image,
+				Name:  t.Spec.Annotations.Name,
+				Image: t.Spec.ContainerSpec.Image,
 			}
 		}
 		ps.Containers.Containers = pcs

@@ -3,7 +3,6 @@ package docker
 import (
 	"context"
 	"fmt"
-	"log"
 	"time"
 
 	"github.com/ContainerSolutions/flux"
@@ -60,7 +59,7 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 		}
 
 		/// LOG
-		log.Printf("[AllServices] OLD: %v, NEW: %v", oldPcs, pcs)
+		fmt.Printf("[AllServices] OLD: %v, NEW: %v\n", oldPcs, pcs)
 
 		ps.Containers.Containers = pcs
 		pss[k] = ps
@@ -130,7 +129,7 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 			}
 		}
 		/// LOG
-		log.Printf("[SomeServices] OLD: %v, NEW: %v", oldPcs, pcs)
+		fmt.Printf("[SomeServices] OLD: %v, NEW: %v\n", oldPcs, pcs)
 
 		ps.Containers.Containers = pcs
 		pss = append(pss, ps)

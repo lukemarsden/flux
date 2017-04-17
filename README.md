@@ -8,6 +8,8 @@ Will be putting it into the config file, once I find how to save in DB.
 
 * docker 1.12+
 
+Set up a swarm if you need to, using e.g. `docker swarm init`.
+
 ## Installation
 
 ```
@@ -29,9 +31,6 @@ go get -u github.com/FiloSottile/gvt
 
 go get github.com/ContainerSolutions/flux
 cd $GOPATH/src/github.com/ContainerSolutions/flux
-git remote add lukefork https://github.com/lukemarsden/flux
-git fetch lukefork
-git checkout lukefork/master
 gvt restore
 make
 docker-compose up

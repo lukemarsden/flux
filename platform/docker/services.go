@@ -64,7 +64,7 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 
 		/// LOG
 		fmt.Printf(
-			"[AllServices] %s: OLD: %v, NEW: %v; ts=%v\n",
+			"[AllServices] %s: OLD: %v, NEW: %v; ts=%+v\n",
 			v.Spec.Name, oldPcs, pcs, ts,
 		)
 

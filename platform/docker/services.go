@@ -61,7 +61,7 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 		/// LOG
 		fmt.Printf(
 			"[AllServices] %s: OLD: %v, NEW: %v\n",
-			v.ServiceSpec.Name, oldPcs, pcs,
+			v.Spec.Name, oldPcs, pcs,
 		)
 
 		ps.Containers.Containers = pcs
@@ -134,7 +134,7 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 		/// LOG
 		fmt.Printf(
 			"[SomeServices] %s: OLD: %v, NEW: %v\n",
-			v.ServiceSpec.Name, oldPcs, pcs,
+			v.Spec.Name, oldPcs, pcs,
 		)
 
 		ps.Containers.Containers = pcs

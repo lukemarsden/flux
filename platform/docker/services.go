@@ -31,24 +31,7 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 		if ignore.Contains(ps.ID) {
 			continue
 		}
-		/// OLD
 		args := filters.NewArgs()
-		args.Add("label",
-			fmt.Sprintf("com.docker.swarm.service.name=%v", v.Spec.Annotations.Name),
-		)
-		cs, err := c.client.ContainerList(ctx, types.ContainerListOptions{Filters: args})
-		if err != nil {
-			return pss, err
-		}
-		oldPcs := make([]platform.Container, len(cs))
-		for k, v := range cs {
-			oldPcs[k] = platform.Container{
-				Name:  v.Labels["com.docker.swarm.task.name"],
-				Image: v.Image,
-			}
-		}
-		/// NEW
-		args = filters.NewArgs()
 		args.Add("service", v.ID)
 		ts, err := c.client.TaskList(ctx, types.TaskListOptions{Filters: args})
 		if err != nil {
@@ -61,13 +44,6 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 				Image: t.Spec.ContainerSpec.Image,
 			}
 		}
-
-		/// LOG
-		fmt.Printf(
-			"[AllServices] %s: OLD: %v, NEW: %v; ts=%+v\n",
-			v.Spec.Name, oldPcs, pcs, ts,
-		)
-
 		ps.Containers.Containers = pcs
 		pss[k] = ps
 	}
@@ -109,24 +85,7 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 			//Status:     string(v.UpdateStatus.State),
 			Containers: platform.ContainersOrExcuse{},
 		}
-		/// OLD
 		args := filters.NewArgs()
-		args.Add("label",
-			fmt.Sprintf("com.docker.swarm.service.name=%v", v.Spec.Annotations.Name),
-		)
-		cs, err := c.client.ContainerList(ctx, types.ContainerListOptions{Filters: args})
-		if err != nil {
-			return pss, err
-		}
-		oldPcs := make([]platform.Container, len(cs))
-		for k, v := range cs {
-			oldPcs[k] = platform.Container{
-				Name:  v.Names[0],
-				Image: v.Image,
-			}
-		}
-		/// NEW
-		args = filters.NewArgs()
 		args.Add("service", v.ID)
 		ts, err := c.client.TaskList(ctx, types.TaskListOptions{Filters: args})
 		if err != nil {
@@ -139,12 +98,6 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 				Image: t.Spec.ContainerSpec.Image,
 			}
 		}
-		/// LOG
-		fmt.Printf(
-			"[SomeServices] %s: OLD: %v, NEW: %v\n",
-			v.Spec.Name, oldPcs, pcs,
-		)
-
 		ps.Containers.Containers = pcs
 		pss = append(pss, ps)
 	}

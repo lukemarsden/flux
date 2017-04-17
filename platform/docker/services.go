@@ -31,9 +31,11 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 		if ignore.Contains(ps.ID) {
 			continue
 		}
-		args := filters.NewArgs()
-		args.Add("label", fmt.Sprintf("com.docker.swarm.service.name=%v", v.Spec.Annotations.Name))
 		/// OLD
+		args := filters.NewArgs()
+		args.Add("label",
+			fmt.Sprintf("com.docker.swarm.service.name=%v", v.Spec.Annotations.Name),
+		)
 		cs, err := c.client.ContainerList(ctx, types.ContainerListOptions{Filters: args})
 		if err != nil {
 			return pss, err
@@ -46,6 +48,8 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 			}
 		}
 		/// NEW
+		args = filters.NewArgs()
+		args.Add("service", v.ID)
 		ts, err := c.client.TaskList(ctx, types.TaskListOptions{Filters: args})
 		if err != nil {
 			return pss, err
@@ -105,9 +109,11 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 			//Status:     string(v.UpdateStatus.State),
 			Containers: platform.ContainersOrExcuse{},
 		}
-		args := filters.NewArgs()
-		args.Add("label", fmt.Sprintf("com.docker.swarm.service.name=%v", v.Spec.Annotations.Name))
 		/// OLD
+		args := filters.NewArgs()
+		args.Add("label",
+			fmt.Sprintf("com.docker.swarm.service.name=%v", v.Spec.Annotations.Name),
+		)
 		cs, err := c.client.ContainerList(ctx, types.ContainerListOptions{Filters: args})
 		if err != nil {
 			return pss, err
@@ -120,6 +126,8 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 			}
 		}
 		/// NEW
+		args = filters.NewArgs()
+		args.Add("service", v.ID)
 		ts, err := c.client.TaskList(ctx, types.TaskListOptions{Filters: args})
 		if err != nil {
 			return pss, err

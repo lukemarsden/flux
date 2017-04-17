@@ -3,6 +3,7 @@ package docker
 import (
 	"context"
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/ContainerSolutions/flux"

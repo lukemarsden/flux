@@ -12,6 +12,21 @@ import (
 	"github.com/docker/docker/api/types/swarm"
 )
 
+func validateService(s swarm.Service, t swarm.Task) bool {
+	// Some checks to see if a service is even worth considering for inclusion.
+	// Only include services that have networks, for mysterious reasons (see
+	// TODO below).
+	return len(s.Spec.Networks) > 0 && len(s.Spec.Networks[0].Aliases) > 0
+}
+
+func validateTask(s swarm.Service, t swarm.Task) bool {
+	// Similarly, checks to see if a task is worth considering for inclusion.
+	// Only include running tasks.
+	return t.Status.State == swarm.TaskStateRunning
+}
+
+// TODO reduce duplication in this file between AllServices and SomeServices.
+
 func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platform.Service, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
@@ -21,8 +36,13 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 		return pss, err
 	}
 	for k, v := range s {
-		if len(v.Spec.Networks) > 0 && len(v.Spec.Networks[0].Aliases) > 0 {
+		if validateService(s) {
 			ps := platform.Service{
+				// TODO explain why we use network aliases to construct our ID.
+				// Sometimes they don't exist, which is why we have the
+				// validateService check, but maybe that means we sometime skip
+				// services with no networks? Why does flux even care about
+				// networks?
 				ID:       flux.MakeServiceID("default_swarm", v.Spec.Networks[0].Aliases[0]),
 				IP:       "?",
 				Metadata: v.Spec.Annotations.Labels,
@@ -38,11 +58,13 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 			if err != nil {
 				return pss, err
 			}
-			pcs := make([]platform.Container, len(ts))
-			for k, t := range ts {
-				pcs[k] = platform.Container{
-					Name:  fmt.Sprintf("%s.%d.%s", v.Spec.Name, t.Slot, t.ID),
-					Image: t.Spec.ContainerSpec.Image,
+			pcs := []platform.Container{}
+			for _, t := range ts {
+				if validateTask(v, t) {
+					pcs = append(pcs, platform.Container{
+						Name:  fmt.Sprintf("%s.%d.%s", v.Spec.Name, t.Slot, t.ID),
+						Image: t.Spec.ContainerSpec.Image,
+					})
 				}
 			}
 			ps.Containers.Containers = pcs
@@ -83,7 +105,7 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 	}
 
 	for _, v := range d {
-		if len(v.Spec.Networks) > 0 && len(v.Spec.Networks[0].Aliases) > 0 {
+		if validateService(v) {
 			ps := platform.Service{
 				ID:       flux.MakeServiceID(namespace, v.Spec.Networks[0].Aliases[0]),
 				IP:       "?",
@@ -97,11 +119,13 @@ func (c *Swarm) SomeServices(ids []flux.ServiceID) (res []platform.Service, err 
 			if err != nil {
 				return pss, err
 			}
-			pcs := make([]platform.Container, len(ts))
-			for k, t := range ts {
-				pcs[k] = platform.Container{
-					Name:  fmt.Sprintf("%s.%d.%s", v.Spec.Name, t.Slot, t.ID),
-					Image: t.Spec.ContainerSpec.Image,
+			pcs := []platform.Container{}
+			for _, t := range ts {
+				if validateTask(v, t) {
+					pcs = append(pcs, platform.Container{
+						Name:  fmt.Sprintf("%s.%d.%s", v.Spec.Name, t.Slot, t.ID),
+						Image: t.Spec.ContainerSpec.Image,
+					})
 				}
 			}
 			ps.Containers.Containers = pcs

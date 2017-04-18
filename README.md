@@ -8,6 +8,8 @@ Will be putting it into the config file, once I find how to save in DB.
 
 * docker 1.12+
 
+Set up a swarm if you need to, using e.g. `docker swarm init`.
+
 ## Installation
 
 ```
@@ -37,7 +39,6 @@ cd ~/
 git clone https://github.com/ContainerSolutions/flux-demo
 cd ~/flux-demo
 
-docker swarm init
 for svc in *.yml; do docker deploy -c $svc default_swarm; done
 ```
 

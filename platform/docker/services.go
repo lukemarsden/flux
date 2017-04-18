@@ -36,7 +36,7 @@ func (c *Swarm) AllServices(namespace string, ignore flux.ServiceIDSet) ([]platf
 		return pss, err
 	}
 	for k, v := range s {
-		if validateService(s) {
+		if validateService(v) {
 			ps := platform.Service{
 				// TODO explain why we use network aliases to construct our ID.
 				// Sometimes they don't exist, which is why we have the

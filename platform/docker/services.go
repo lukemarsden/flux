@@ -12,7 +12,7 @@ import (
 	"github.com/docker/docker/api/types/swarm"
 )
 
-func validateService(s swarm.Service, t swarm.Task) bool {
+func validateService(s swarm.Service) bool {
 	// Some checks to see if a service is even worth considering for inclusion.
 	// Only include services that have networks, for mysterious reasons (see
 	// TODO below).
